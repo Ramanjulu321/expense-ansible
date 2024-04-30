@@ -1,8 +1,10 @@
 - name: configure db server
   hosts: db
   become: yes
+  vars:
+    login_host: db.daws-78s.store
   tasks:
-  - name: Install mysql server
+  - name: Install Mysql server
     ansible.builtin.dnf:
      name: mysql-server
      state: latest
@@ -10,13 +12,14 @@
   - name: start and enable mysql server
     ansible.builtin.service:
      name: mysqld
+     state: started
      enabled: yes
 
   - name: check db connection
     community.mysql.mysql_info:
       login_user: root
       login_password: ExpenseApp@1
-      login_host: "{{ db.daws-78s.store }}"
+      login_host: "{{ login_host }}"
       filter: version
     ignore_errors: yes
     register: mysql_connection_output
