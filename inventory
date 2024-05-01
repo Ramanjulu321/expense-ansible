@@ -3,3 +3,6 @@ db.daws-78s.store
 
 [backend]
 backend.daws-78s.store
+
+[frontend]
+frontend.daws-78s.store
